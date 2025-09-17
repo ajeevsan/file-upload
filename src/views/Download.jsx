@@ -18,22 +18,9 @@ export const Download = () => {
       const response = await downloadFile(fileId, passcode);
 
       // Get blob from response
-      const blob = await response.blob();
-      const contentDisposition = response.headers.get('Content-Disposition');
-
-      // Extract file name
-      let fileName = 'downloaded_file';
-      if (contentDisposition && contentDisposition.includes('filename=')) {
-        fileName = contentDisposition.split('filename=')[1].replace(/"/g, '');
-      }
-
-      // Create a download link
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+      const data = await response
+      console.log(data)
+      alert(JSON.stringify(data))
     } catch (err) {
       console.error(err);
       alert('Download error');
